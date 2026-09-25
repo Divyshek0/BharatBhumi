@@ -21,10 +21,26 @@ services:
     dockerfilePath: ./core.Dockerfile
     healthCheckPath: /actuator/health
     envVars:
-      - key: DATABASE_URL
+      - key: DB_HOST
         fromDatabase:
           name: bharatbhumi-db
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: bharatbhumi-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: bharatbhumi-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: bharatbhumi-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: bharatbhumi-db
+          property: password
       - key: JWT_SECRET
         generateValue: true
       - key: AI_HOSTPORT
@@ -63,3 +79,5 @@ databases:
     postgresMajorVersion: "16"
     databaseName: bharatbhumi
     user: bharatbhumi
+
+

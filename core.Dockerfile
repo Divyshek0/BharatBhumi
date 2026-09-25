@@ -11,4 +11,4 @@ RUN mvn -q -DskipTests package
 FROM eclipse-temurin:21-jre
 COPY --from=build /w/target/*.jar /app.jar
 EXPOSE 10000
-ENTRYPOINT ["sh", "-c", "if [ -n \"$DATABASE_URL\" ]; then export DB_URL=\"jdbc:$DATABASE_URL\"; fi; if [ -n \"$AI_HOSTPORT\" ]; then export AI_URL=\"http://$AI_HOSTPORT\"; fi; exec java -jar /app.jar"]
+ENTRYPOINT ["sh", "-c", "if [ -n \"$DB_HOST\" ]; then export DB_URL=\"jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}\"; fi; if [ -n \"$AI_HOSTPORT\" ]; then export AI_URL=\"http://$AI_HOSTPORT\"; fi; exec java -jar /app.jar"]
